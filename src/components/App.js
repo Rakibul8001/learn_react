@@ -18,6 +18,7 @@ export default function App() {
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/quiz" element={<Quiz/>}/>
           <Route exact path="/result" element={<Result/>}/>
+            <Route exact path="/result" element={<Result/>}/>
         </Routes>
       </Layout>
     </Router>
