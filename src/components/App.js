@@ -7,10 +7,12 @@ import Login from './pages/Login';
 import Quiz from './pages/Quiz';
 import Result from './pages/Result';
 import Signup from './pages/Signup';
+import { AuthProvider } from '../contexts/AuthContext';
 
 export default function App() {
   return (
     <Router>
+      <AuthProvider>
       <Layout>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
@@ -21,6 +23,7 @@ export default function App() {
             <Route exact path="/result" element={<Result/>}/>
         </Routes>
       </Layout>
+      </AuthProvider>
     </Router>
 
   );
