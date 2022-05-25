@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useHistory  from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import formClasses from '../../styles/Form.module.css';
 import signupClasses from '../../styles/Signup.module.css';
@@ -20,9 +20,8 @@ export default function Signup() {
     const [error,setError] = useState();
     const [loading,setLoading] = useState();
 
-    const history = useHistory();
-
-    const {signup} = useAuth();
+    const { signup } = useAuth();
+    const navigate = useNavigate();
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -35,10 +34,11 @@ export default function Signup() {
             setError("")
             setLoading(true)
             await signup(email,password,username);
-            history.push("/");
+            navigate('/');
 
-        }catch{
+        }catch(err){
             console.log('something wrong');
+            console.log(err);
             setLoading(false);
             setError("wrong");
         }
@@ -50,15 +50,16 @@ export default function Signup() {
         <div className="column">
            <Illustration/>
 
-            <Form formClass={`${signupClasses.signup} ${formClasses.form}` } method="post" onSubmit={handleSubmit}>
-                <TextInput type="text" placeholder="Enter name" icon="person" onchange={(e)=> setUsername(e.target.value)}/>
-                <TextInput type="text" placeholder="Enter email" icon="alternate_email" onchange={(e)=> setEmail(e.target.value)}/>
-                <TextInput type="password" placeholder="Enter password" icon="lock" onchange={(e)=> setPassword(e.target.value)}/>
-                <TextInput type="password" placeholder="Confirm password" icon="lock_clock" onchange={(e)=> setConfirmPassword(e.target.value)}/>
-                <Checkbox text="I agree to the Terms &amp; Conditions" onchange={(e)=> setAgree(e.target.value)}/>
-                <Button>
+            <Form formClass={`${signupClasses.signup} ${formClasses.form}` } onSubmit={handleSubmit}>
+                <TextInput type="text" placeholder="Enter name" icon="person" value={username} onChange={(e)=> setUsername(e.target.value)}/>
+                <TextInput type="text" placeholder="Enter email" icon="alternate_email" value={email}  onChange={(e)=> setEmail(e.target.value)}/>
+                <TextInput type="password" placeholder="Enter password" icon="lock" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                <TextInput type="password" placeholder="Confirm password" icon="lock_clock" value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)}/>
+                <Checkbox text="I agree to the Terms &amp; Conditions" value={agree} onChange={(e)=> setAgree(e.target.value)}/>
+                <Button disabled={loading}>
                     <span>Submit Now</span>
                 </Button>
+                {error && <p className="error">{error}</p>}
                 <div className="info">
                     Already have an account? <a href="login.html">Login</a> instead.
                 </div>

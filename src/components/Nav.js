@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 
 export default function Nav() {
   return (
-    <nav class={classes.nav}>
+    <nav className={classes.nav}>
     <ul>
       <li>
-        <Link to="/" class={classes.brand}>
+        <Link to="/" className={classes.brand}>
           <img src={logo} alt="Learn with Sumit Logo" />
           <h3>Learn with Sumit</h3>
         </Link>
