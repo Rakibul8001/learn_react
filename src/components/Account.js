@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 export default function Account() {
   return (
-    <div class={classes.account}>
-    <span class="material-icons-outlined" title="Account">
+    <div className={classes.account}>
+    <span className="material-icons-outlined" title="Account">
       account_circle
     </span>
     <Link to="/signup">Signup</Link>
