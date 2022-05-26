@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import formClasses from '../../styles/Form.module.css';
 import signupClasses from '../../styles/Signup.module.css';
@@ -10,7 +10,7 @@ import Illustration from '../Illustration';
 import TextInput from '../TextInput';
 
 
-export default function Signup() {
+export default function Signup({text}) {
 
     const [username,setUsername] = useState("");
     const [email,setEmail] = useState("");
@@ -46,7 +46,7 @@ export default function Signup() {
 
   return (
       <>
-        <h1>Create an account</h1>
+        <h1>Create an account  {text}</h1>
         <div className="column">
            <Illustration/>
 
@@ -57,11 +57,11 @@ export default function Signup() {
                 <TextInput type="password" placeholder="Confirm password" icon="lock_clock" value={confirmPassword} onChange={(e)=> setConfirmPassword(e.target.value)}/>
                 <Checkbox text="I agree to the Terms &amp; Conditions" value={agree} onChange={(e)=> setAgree(e.target.value)}/>
                 <Button disabled={loading}>
-                    <span>Submit Now</span>
+                    <span>Signup</span>
                 </Button>
                 {error && <p className="error">{error}</p>}
                 <div className="info">
-                    Already have an account? <a href="login.html">Login</a> instead.
+                    Already have an account? <Link to="/login">Login</Link> instead.
                 </div>
             </Form>
         </div>
